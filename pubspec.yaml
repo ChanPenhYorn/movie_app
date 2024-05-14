@@ -19,9 +19,15 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  fonts:
+    - family: KantumruyPro
+      fonts:
+        - asset: assets/fonts/KKantumruyPro-Bold.ttf
+        - asset: assets/fonts/KantumruyPro-Regular.ttf
+
+
 
   uses-material-design: true
-
   assets:
    - assets/
 
