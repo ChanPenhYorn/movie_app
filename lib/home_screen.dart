@@ -127,11 +127,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     future: getTrendingMovies(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No movies found'));
+                        return const Center(child: Text('No movies found'));
                       } else {
                         return TrendingSlide(
                           snapshot: snapshot,
@@ -159,11 +159,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     future: getTopRateMovies(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No movies found'));
+                        return const Center(child: Text('No movies found'));
                       } else {
                         return MovieSlide(
                             snapshot: snapshot, length: snapshot.data!.length);
@@ -189,11 +189,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     future: getUpcommingMovies(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(child: Text('Error: ${snapshot.error}'));
                       } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return Center(child: Text('No movies found'));
+                        return const Center(child: Text('No movies found'));
                       } else {
                         return MovieSlide(
                             snapshot: snapshot, length: snapshot.data!.length);
