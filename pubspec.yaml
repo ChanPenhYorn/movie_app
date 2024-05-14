@@ -22,7 +22,7 @@ flutter:
   fonts:
     - family: KantumruyPro
       fonts:
-        - asset: assets/fonts/KKantumruyPro-Bold.ttf
+        - asset: assets/fonts/KantumruyPro-Bold.ttf
         - asset: assets/fonts/KantumruyPro-Regular.ttf
 
 
