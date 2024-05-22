@@ -4,8 +4,6 @@ import 'package:flutflix/api/api_end_point.dart';
 import 'package:flutflix/constants/constant.dart';
 import 'package:flutflix/constants/style_font.dart';
 import 'package:flutflix/models/movie.dart';
-import 'package:flutflix/models/top_rate_movie1.dart';
-import 'package:flutflix/models/upcoming_movie.dart';
 import 'package:flutflix/widgets/movie_slide.dart';
 import 'package:flutflix/widgets/trending_slide.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +18,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<MovieModel> trendingMovieList = [];
-  List<TopRateModel> topRateMovieList = [];
-  List<UpcomingModel> upcomingMovieList = [];
+  List<MovieModel> topRateMovieList = [];
+  List<MovieModel> upcomingMovieList = [];
 
   Future<List<MovieModel>> getTrendingMovies() async {
     final String url =
@@ -43,15 +41,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<List<TopRateModel>> getTopRateMovies() async {
+  Future<List<MovieModel>> getTopRateMovies() async {
     final String url =
         '${Api.baseUrl}${ApiEndPoint.topRateMovies}${Constants.apiKey}';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        List<TopRateModel> topRateMovieList = (data['results'] as List)
-            .map((json) => TopRateModel.fromJson(json))
+        List<MovieModel> topRateMovieList = (data['results'] as List)
+            .map((json) => MovieModel.fromJson(json))
             .toList();
 
         return topRateMovieList;
@@ -63,15 +61,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<List<UpcomingModel>> getUpcommingMovies() async {
+  Future<List<MovieModel>> getUpcommingMovies() async {
     final String url =
         '${Api.baseUrl}${ApiEndPoint.upcomingMovies}${Constants.apiKey}';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        List<UpcomingModel> upcomingMovieList = (data['results'] as List)
-            .map((json) => UpcomingModel.fromJson(json))
+        List<MovieModel> upcomingMovieList = (data['results'] as List)
+            .map((json) => MovieModel.fromJson(json))
             .toList();
 
         return upcomingMovieList;
@@ -114,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   "Trending Movies",
-                  style: Styles.kantumruyPro(
+                  style: StyleFonts.kantumruyPro(
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.left,
@@ -146,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   "Top rate Movies",
-                  style: Styles.kantumruyPro(
+                  style: StyleFonts.kantumruyPro(
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.left,
@@ -155,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 32,
                 ),
                 SizedBox(
-                  child: FutureBuilder<List<TopRateModel>>(
+                  child: FutureBuilder<List<MovieModel>>(
                     future: getTopRateMovies(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
@@ -176,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   "Upcomming Movies",
-                  style: Styles.kantumruyPro(
+                  style: StyleFonts.kantumruyPro(
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.left,
@@ -185,7 +183,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 32,
                 ),
                 SizedBox(
-                  child: FutureBuilder<List<UpcomingModel>>(
+                  child: FutureBuilder<List<MovieModel>>(
                     future: getUpcommingMovies(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
