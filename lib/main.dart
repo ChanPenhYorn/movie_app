@@ -1,5 +1,5 @@
-import 'package:flutflix/colors.dart';
-import 'package:flutflix/screens/home_screen.dart';
+import 'package:flixkh/colors.dart';
+import 'package:flixkh/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutflix',
+      title: 'FlixKh',
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Colours.scaffoldBgColor,
       ),

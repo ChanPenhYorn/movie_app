@@ -1,4 +1,4 @@
-# flutflix
+# flixkh
 
 A new Flutter project.
 

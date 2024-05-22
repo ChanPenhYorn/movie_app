@@ -1,6 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutflix/constants/constant.dart';
-import 'package:flutflix/screens/details_screen.dart';
+import 'package:flixkh/constants/constant.dart';
+import 'package:flixkh/screens/details_screen.dart';
 import 'package:flutter/material.dart';
 
 class TrendingSlide extends StatelessWidget {

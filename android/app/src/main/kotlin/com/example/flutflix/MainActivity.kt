@@ -1,4 +1,4 @@
-package com.example.flutflix
+package com.example.flixkh
 
 import io.flutter.embedding.android.FlutterActivity
 

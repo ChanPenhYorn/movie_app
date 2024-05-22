@@ -1,4 +1,4 @@
-import 'package:flutflix/constants/style_color.dart';
+import 'package:flixkh/constants/style_color.dart';
 import 'package:flutter/material.dart';
 
 class BackBtn extends StatelessWidget {

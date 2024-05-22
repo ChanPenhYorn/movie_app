@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutflix/api/api.dart';
-import 'package:flutflix/api/api_end_point.dart';
-import 'package:flutflix/constants/constant.dart';
-import 'package:flutflix/constants/style_font.dart';
-import 'package:flutflix/models/movie.dart';
-import 'package:flutflix/widgets/movie_slide.dart';
-import 'package:flutflix/widgets/trending_slide.dart';
+import 'package:flixkh/api/api.dart';
+import 'package:flixkh/api/api_end_point.dart';
+import 'package:flixkh/constants/constant.dart';
+import 'package:flixkh/constants/style_font.dart';
+import 'package:flixkh/models/movie.dart';
+import 'package:flixkh/widgets/movie_slide.dart';
+import 'package:flixkh/widgets/trending_slide.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -95,9 +95,10 @@ class _HomeScreenState extends State<HomeScreen> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Image.asset(
-            "assets/flutflix.png",
+            "assets/title_logo.png",
             fit: BoxFit.cover,
             height: 40,
+            width: 250,
             filterQuality: FilterQuality.high,
           ),
           centerTitle: true,
@@ -111,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Trending Movies",
+                  "ភាពយន្តពេញនិយម",
                   style: StyleFonts.kantumruyPro(
                     fontSize: 25,
                   ),
@@ -143,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 32,
                 ),
                 Text(
-                  "Top rate Movies",
+                  "ភាពយន្ត​កម្រិត​កំពូល",
                   style: StyleFonts.kantumruyPro(
                     fontSize: 25,
                   ),
@@ -173,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 32,
                 ),
                 Text(
-                  "Upcomming Movies",
+                  "ភាពយន្តដែលនឹងមកដល់ឆាប់ៗនេះ",
                   style: StyleFonts.kantumruyPro(
                     fontSize: 25,
                   ),

@@ -1,6 +1,7 @@
-import 'package:flutflix/constants/constant.dart';
-import 'package:flutflix/screens/details_screen.dart';
+import 'package:flixkh/constants/constant.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/details_screen.dart';
 
 class MovieSlide extends StatelessWidget {
   const MovieSlide({

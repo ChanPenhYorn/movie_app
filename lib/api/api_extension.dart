@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutflix/api/api.dart';
-import 'package:flutflix/api/api_end_point.dart';
-import 'package:flutflix/constants/constant.dart';
-import 'package:flutflix/models/movie.dart';
+import 'package:flixkh/api/api.dart';
+import 'package:flixkh/api/api_end_point.dart';
+import 'package:flixkh/constants/constant.dart';
+import 'package:flixkh/models/movie.dart';
 import 'package:http/http.dart' as http;
 
 class MovieRepository {
