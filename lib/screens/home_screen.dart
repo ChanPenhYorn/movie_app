@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Text(
                   "Trending Movies",
-                  style: StyleFonts.kantumruyPro(
+                  style: Styles.kantumruyPro(
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.left,
@@ -146,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   "Top rate Movies",
-                  style: StyleFonts.kantumruyPro(
+                  style: Styles.kantumruyPro(
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.left,
@@ -176,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   "Upcomming Movies",
-                  style: StyleFonts.kantumruyPro(
+                  style: Styles.kantumruyPro(
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.left,

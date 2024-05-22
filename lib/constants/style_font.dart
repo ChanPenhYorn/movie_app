@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class StyleFonts {
+class Styles {
   static TextStyle kantumruyPro({
     double? fontSize,
     Color? color,
