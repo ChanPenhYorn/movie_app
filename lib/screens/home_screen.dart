@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flixkh/api/api.dart';
 import 'package:flixkh/api/api_end_point.dart';
 import 'package:flixkh/constants/constant.dart';
 import 'package:flixkh/constants/style_font.dart';
 import 'package:flixkh/models/movie.dart';
+import 'package:flixkh/services/singleton_service.dart';
 import 'package:flixkh/widgets/movie_slide.dart';
 import 'package:flixkh/widgets/trending_slide.dart';
 import 'package:flutter/material.dart';
@@ -81,11 +83,50 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Future<void> checkConnectivity(BuildContext context) async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      showNoConnectionDialog(context);
+    }
+  }
+
+  void showNoConnectionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('No Internet Connection'),
+          content: const Text(
+              'Please check your internet connection and try again.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
+    // SingletonService().checkConnectivity(context);
+    checkConnectivity(context);
     getTrendingMovies();
     // trendingMovieList = Api().getTrendiingMovie();
+  }
+
+  Future<bool> checkNetwork() async {
+    var connectivityResult = (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.none) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   @override
@@ -103,106 +144,125 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           centerTitle: true,
         ),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "ភាពយន្តពេញនិយម",
-                  style: StyleFonts.kantumruyPro(
-                    fontSize: 25,
+        body: checkNetwork() == false
+            ? CircularProgressIndicator()
+            : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "ភាពយន្តពេញនិយម",
+                        style: StyleFonts.kantumruyPro(
+                          fontSize: 25,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      SizedBox(
+                        child: FutureBuilder<List<MovieModel>>(
+                          future: getTrendingMovies(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData ||
+                                snapshot.data!.isEmpty) {
+                              return const Center(
+                                  child: Text('No movies found'));
+                            } else {
+                              return TrendingSlide(
+                                snapshot: snapshot,
+                                lenght: snapshot.data!.length,
+                              );
+                            }
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      Text(
+                        "ភាពយន្ត​កម្រិត​កំពូល",
+                        style: StyleFonts.kantumruyPro(
+                          fontSize: 25,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      SizedBox(
+                        child: FutureBuilder<List<MovieModel>>(
+                          future: getTopRateMovies(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData ||
+                                snapshot.data!.isEmpty) {
+                              return const Center(
+                                  child: Text('No movies found'));
+                            } else {
+                              return MovieSlide(
+                                  snapshot: snapshot,
+                                  length: snapshot.data!.length);
+                            }
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      Text(
+                        "ភាពយន្តដែលនឹងមកដល់ឆាប់ៗនេះ",
+                        style: StyleFonts.kantumruyPro(
+                          fontSize: 25,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      SizedBox(
+                        child: FutureBuilder<List<MovieModel>>(
+                          future: getUpcommingMovies(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData ||
+                                snapshot.data!.isEmpty) {
+                              return const Center(
+                                  child: Text('No movies found'));
+                            } else {
+                              return MovieSlide(
+                                  snapshot: snapshot,
+                                  length: snapshot.data!.length);
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                  textAlign: TextAlign.left,
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
-                SizedBox(
-                  child: FutureBuilder<List<MovieModel>>(
-                    future: getTrendingMovies(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return const Center(child: Text('No movies found'));
-                      } else {
-                        return TrendingSlide(
-                          snapshot: snapshot,
-                          lenght: snapshot.data!.length,
-                        );
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                Text(
-                  "ភាពយន្ត​កម្រិត​កំពូល",
-                  style: StyleFonts.kantumruyPro(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                SizedBox(
-                  child: FutureBuilder<List<MovieModel>>(
-                    future: getTopRateMovies(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return const Center(child: Text('No movies found'));
-                      } else {
-                        return MovieSlide(
-                            snapshot: snapshot, length: snapshot.data!.length);
-                      }
-                    },
-                  ),
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                Text(
-                  "ភាពយន្តដែលនឹងមកដល់ឆាប់ៗនេះ",
-                  style: StyleFonts.kantumruyPro(
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.left,
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                SizedBox(
-                  child: FutureBuilder<List<MovieModel>>(
-                    future: getUpcommingMovies(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                        return const Center(child: Text('No movies found'));
-                      } else {
-                        return MovieSlide(
-                            snapshot: snapshot, length: snapshot.data!.length);
-                      }
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
+              ));
   }
 }

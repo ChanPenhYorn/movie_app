@@ -13,6 +13,8 @@ dependencies:
   http: ^1.1.0
   carousel_slider: ^4.2.1
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
+  connectivity_plus: ^6.0.3
 
 dev_dependencies:
   flutter_test:
@@ -26,13 +28,18 @@ flutter:
         - asset: assets/fonts/KantumruyPro-Bold.ttf
         - asset: assets/fonts/KantumruyPro-Regular.ttf
 
-
-
-
-
   uses-material-design: true
   assets:
    - assets/
+
+flutter_native_splash:
+  color: "#23272E"
+  image: assets/title_logo.png
+  android: true
+  ios: true
+
+  
+
 
   
   

@@ -41,7 +41,7 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               child: Column(
                 children: [
-                  Text("Overview",
+                  Text("ទិដ្ឋភាពទូទៅនៃរឿង",
                       style: StyleFonts.kantumruyPro(fontSize: 30, bold: true)),
                   const SizedBox(
                     height: 16,
@@ -60,14 +60,14 @@ class DetailScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(10)),
                         child: Row(
                           children: [
                             Text(
-                              "Release date: ",
+                              "ចេញផ្សាយ: ",
                               style: StyleFonts.kantumruyPro(
                                   fontSize: 14, bold: true),
                             ),
@@ -90,13 +90,14 @@ class DetailScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "Rating: ",
+                              "ការវាយតម្លៃ: ",
                               style: StyleFonts.kantumruyPro(
                                   fontSize: 14, bold: true),
                             ),
                             const Icon(
                               Icons.star,
                               color: StyleColor.ratingColor,
+                              size: 14,
                             ),
                             Text(
                               "${movie.voteAverage?.toStringAsFixed(1)}/10",
